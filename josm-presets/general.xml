@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0" author="Galen CC">
+<group name="Annotation">
+	<item name="Operator" type="node,way,closedway,multipolygon,relation">
+		<link wiki="Key:operator" />
+		<space />
+		<text key="operator" text="Operator name" match="key" />
+		<combo key="operator:type" text="Classification" match="key" values="public,private,government,community,business,religious,university,private_non_profit,ngo,council,school,military,association,cooperative,charitable,corporation" />
+		<optional text="Contact details:">
+			<text key="operator:website" text="Website" match="key" />
+			<text key="operator:email" text="Email Address" match="key" />
+			<space />
+			<text key="operator:phone" text="Phone number" match="key" />
+			<text key="operator:fax" text="Fax Number" match="key" />
+			<label text="Use E.123 format, e.g. +49 11223 456 7890" />
+			<space />
+			<text key="operator:wikidata" text="Wikidata" match="key" />
+			<text key="operator:wikipedia" text="Wikipedia" match="key" />
+		</optional>
+		<optional text="Postal address:">
+			<!-- modified from annotation/address -->
+			<text key="operator:addr:housenumber" text="House number" match="key" />
+			<text key="operator:addr:street" text="Street name" match="key" alternative_autocomplete_keys="name" />
+			<text key="operator:addr:city" text="City name" match="key" />
+			<text key="operator:addr:postcode" text="Post code" match="key" />
+			<combo key="operator:addr:country" text="Country code" values_from="java.util.Locale#getISOCountries" match="key" values_context="country codes" />
+			<text key="operator:addr:place" text="Place name" match="key" alternative_autocomplete_keys="name" />
+			<text key="operator:addr:unit" text="Unit/Suite" match="key" />
+			<text key="operator:addr:hamlet" text="Hamlet" match="key" />
+			<text key="operator:addr:province" text="Province" match="key" />
+			<combo key="addr:state" text="State" text_context="addr:" values="AL,AK,AZ,AR,CA,CO,CT,DE,FL,GA,HI,ID,IL,IN,IA,KS,KY,LA,ME,MD,MA,MI,MN,MS,MO,MT,NE,NV,NH,NJ,NM,NY,NC,ND,OH,OK,OR,PA,RI,SC,SD,TN,TX,UT,VT,VA,WA,WV,WI,DC,AS,GU,MP,PR,UM,VI" match="key" />
+		</optional>
+		<optional text="Name:">
+			<!-- FIXME: are :abbr and :short unique? -->
+			<text key="operator:official_name" text="Official name" match="key" />
+			<text key="operator:abbr" text="Abbreviated name" match="key" />
+			<text key="operator:short" text="Short name" match="key" />
+			<text key="operator:ref" text="Reference" match="key" />
+			<text key="operator:description" text="Description" match="key" />
+		</optional>
+		<preset_link preset_name="Contact (Schema with 'contact:*' Prefix)" text_context="Contact" />
+		<preset_link preset_name="Social Networks" />
+	</item>
+</group>
+</presets>
