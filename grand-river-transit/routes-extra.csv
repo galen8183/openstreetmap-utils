@@ -1,0 +1,59 @@
+route_id,route_long_name          ,route_colour
+1       ,Queen-River              ,#7a1d90
+3       ,Ottawa South             ,#6ccfe3
+4       ,Glasgow-Margaret         ,#796246
+5       ,Erb                      ,#418ed3
+6       ,Bridge-Courtland         ,#2e3491
+7       ,King                     ,#ec1b29
+8       ,Weber                    ,#2ba147
+9       ,Lakeshore                ,#87cf32
+10      ,Pioneer                  ,#3067bb
+12      ,Westmount                ,#eb028d
+13      ,Laurelwood               ,#fcc707
+14      ,Bathurst                 ,#456a6b
+16      ,Strasburg-Belmont        ,#7ab13f
+19      ,Hazel                    ,#f78814
+20      ,Victoria-Frederick       ,#c18fce
+21      ,Elmira                   ,#98d421
+22      ,Laurentian West          ,#7364b8
+23      ,Idlewood                 ,#f899d1
+26      ,Trillium                 ,#522613
+27      ,Morrison                 ,#f46e35
+28      ,Franklin North           ,#b6da17
+29      ,Keats-University         ,#7e74ae
+30      ,Ring Road                ,#7c3819
+31      ,Columbia                 ,#a4a466
+33      ,Huron                    ,#f14625
+34      ,Bingemans                ,#8b198e
+35      ,Greenbrook               ,#f8a10d
+36      ,Thomas Slee              ,#52aee6
+50      ,Dundas-Myers             ,#2e3491
+51      ,Hespeler                 ,#ee1d23
+53      ,Franklin                 ,#2eab48
+55      ,Grand Ridge              ,#7f329c
+56      ,Langs                    ,#456a6b
+57      ,Blair                    ,#f47116
+58      ,Elgin North              ,#79625d
+60      ,Burnett                  ,#44588a
+61      ,Preston                  ,#3cafab
+62      ,Speedsville              ,#9f4739
+63      ,Champlain                ,#f9b10b
+65      ,Saginaw                  ,#f25030
+67      ,Eagle-Pinebush           ,#791e8f
+76      ,Doon Mills               ,#fcc707
+77      ,Wilmot                   ,#ef3026
+78      ,Fountain                 ,#21602f
+79      ,Breslau                  ,#100e0d
+91      ,Late Night Loop          ,#56c59d
+110     ,College Express          ,#28449f
+201     ,iXpress Fischer-Hallman  ,#87cf25
+202     ,iXpress University       ,#87cf25
+203     ,iXpress Maple Grove      ,#87cf25
+204     ,iXpress Highland-Victoria,#87cf25
+205     ,iXpress Ottawa           ,#87cf25
+206     ,iXpress Coronation       ,#87cf25
+301     ,ION light rail           ,#244895
+302     ,ION bus                  ,#244895
+9801    ,GCI Special              ,#ee1d23
+9851    ,GCI Special              ,#ee1d23
+9952    ,GCI - AST Special        ,#ee1d23
