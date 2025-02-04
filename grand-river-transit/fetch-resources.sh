@@ -15,6 +15,9 @@ EOF
 
 BASEURL="https://www.grt.ca/en"
 
+# getpdfresource extracts PDF hyperlinks from grt.ca/en/schedules-maps/$2
+# link text is used for deduplication, sorted by date (assuming Y-M-D filenames)
+# output is written to $1 with format "URL\tName"
 getpdfresource() {
 	curl -s -o "$1" "$BASEURL/en/schedules-maps/$2"
 	# grep each line with a resource URL
@@ -22,13 +25,14 @@ getpdfresource() {
 	# TODO: relying on a very particular format feels suboptimal, can we improve
 	# this scraping and transformation easily?
 	sed -i \
-		-e '\|/en/schedules-maps/resources/[^/]\+/[^.]\+\.pdf|!d' \
-		-e 's|<li><a[^>]*href="/en\([^"]*\)"[^>]*>\([^<]*<\)/a>.*|\1\t\2|g' \
-		-e 's/\(&nbsp;\)*\| *<//g' \
+		-e '\|/en/schedules-maps/resources/[^/]\+/[^.]\+\.pdf|!d' \ # isolate links
+		-e 's|<li><a[^>]*href="/en\([^"]*\)"[^>]*>\([^<]*<\)/a>.*|\1\t\2|g' \ # get path
+		-e 's/&nbsp;\| *<//g' \ # remove spaces
 		"$1"
 
-	# deduplicate, preferring newer docs
-	sort -rfk 2 -o "$1" "$1" # sort in reverse, case-insensitively, in place
+	# deduplicate, preferring newer docs (sort seemingly implicitly sorts by the
+	# first field after the second)
+	sort -rfk 2 -o "$1" "$1" # reverse, fold case, 2nd field, in place
 	uniq --skip-fields=1 "$1" "$1.uniq" # uniq 2nd field
 	mv "$1.uniq" "$1"
 }
