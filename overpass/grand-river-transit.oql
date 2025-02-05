@@ -1,0 +1,8 @@
+/* find operator=/network="GRT/Grand River Transit" */
+[out:xml][timeout:25][bbox:{{bbox}}];
+(
+	rel[~"operator(:short)?"~"GRT|Grand River Transit",i];
+	rel[~"network(:short)?"~"GRT|Grand River Transit",i];
+);
+(._;>;>;>;);
+out meta;

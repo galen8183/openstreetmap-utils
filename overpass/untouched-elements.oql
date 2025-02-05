@@ -1,0 +1,8 @@
+/* find elements not edited since dateBefore or earlier,
+ * ignoring untagged elements
+ */
+{{dateBefore=2018-01-01T00:00:00Z}}
+
+[timeout:30][bbox:{{bbox}}];
+(nwr(if:count_tags() > 0); - nwr(newer:"{{dateBefore}}"););
+out geom;
