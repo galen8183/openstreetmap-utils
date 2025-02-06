@@ -1,3 +1,3 @@
 [submodule "waterloo-region-addresses"]
-	path = waterloo-region-addresses
+	path = ca/waterloo-region-addresses
 	url = https://github.com/jtracey/WaterlooRegionAddresses.git
