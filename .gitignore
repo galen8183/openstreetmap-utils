@@ -1,3 +1,6 @@
 gpx/
 *-traffic-signs/
 *-traffic-signs.*
+
+*.osm
+*.pdf
