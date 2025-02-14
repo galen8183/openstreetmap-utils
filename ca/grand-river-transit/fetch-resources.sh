@@ -19,15 +19,15 @@ BASEURL="https://www.grt.ca/en"
 # link text is used for deduplication, sorted by date (assuming Y-M-D filenames)
 # output is written to $1 with format "URL\tName"
 getpdfresource() {
-	curl -s -o "$1" "$BASEURL/en/schedules-maps/$2"
+	curl -s -o "$1" -z "$1" "$BASEURL/schedules-maps/$2"
 	# grep each line with a resource URL
 	# transform to "Name	URL"
 	# TODO: relying on a very particular format feels suboptimal, can we improve
 	# this scraping and transformation easily?
 	sed -i \
-		-e '\|/en/schedules-maps/resources/[^/]\+/[^.]\+\.pdf|!d' \ # isolate links
-		-e 's|<li><a[^>]*href="/en\([^"]*\)"[^>]*>\([^<]*<\)/a>.*|\1\t\2|g' \ # get path
-		-e 's/&nbsp;\| *<//g' \ # remove spaces
+		-e '\|/en/schedules-maps/resources/[^/]\+/[^.]\+\.pdf|!d' \
+		-e 's|<li><a[^>]*href="/en\([^"]*\)"[^>]*>\([^<]*<\)/a>.*|\1\t\2|g' \
+		-e 's/&nbsp;\| *<//g' \
 		"$1"
 
 	# deduplicate, preferring newer docs (sort seemingly implicitly sorts by the
@@ -42,7 +42,7 @@ system() {
 	echo downloading system map page...
 	curl -s -o "$SRC" "$BASEURL/schedules-maps/system-map.aspx"
 	MAP=$(grep -o '/schedules-maps/resources/.*\.pdf' "$SRC")
-	curl -s -o system-map.pdf "$BASEURL/$MAP"
+	curl -s -o system-map.pdf -z system-map.pdf "$BASEURL/$MAP"
 	echo downloaded map from $(echo "$MAP" | grep -o '\(-\?[0-9]\)\{8\}') to system-map.pdf
 }
 
@@ -64,12 +64,13 @@ schedules() {
 	esac
 
 	# download each schedule to NNN.pdf
+	# TODO: parallelise
 	while read LINE; do
 		SCHED=$(echo "$LINE" | cut -f1)
 		ROUTE=$(echo "$LINE" | cut -f2)
 		NUM=$(echo "$ROUTE" | grep -o '[0-9]\+' | xargs printf "%03d")
 		printf "dowloading %s to %s.pdf..." "$ROUTE" "$NUM"
-		curl -s -o "$NUM.pdf" "$BASEURL/$SCHED"
+		curl -s -o "$NUM.pdf" -z "$NUM.pdf" "$BASEURL/$SCHED"
 		echo done!
 	done < "$SRC"
 }
@@ -92,6 +93,7 @@ stations() {
 	esac
 
 	# download each station to name.pdf
+	# TODO: parallelise
 	while read LINE; do
 		MAP=$(echo "$LINE" | cut -f1)
 		STAT=$(echo "$LINE" | cut -f2)
@@ -101,7 +103,7 @@ stations() {
 			sed -e 's/-\(station\|terminal\)-\?//' -e 's/-.pdf/.pdf/'
 		)
 		printf "dowloading %s to %s.pdf..." "$STAT" "$NAME"
-		curl -s -o "$NAME.pdf" "$BASEURL/$MAP"
+		curl -s -o "$NAME.pdf" -z "$NAME.pdf" "$BASEURL/$MAP"
 		echo done!
 	done < "$SRC"
 }
