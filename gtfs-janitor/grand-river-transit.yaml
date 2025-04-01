@@ -2,29 +2,32 @@ name: "Grand River Transit (Ontario, CA)"
 
 candidateNodeFilter: |
   (
-    $not($exists($v.tags.operator)) or
-    ($v.tags.operator = "GRT") or
-    ($v.tags.operator = "Grand River Transit") or
-    ($v.tags.network = "GRT") or
-    ($v.tags.network = "Grand River Transit")
-  ) and (
     (
       $not($exists($v.tags.public_transport)) or
       $v.tags.public_transport != "stop_position"
-    ) or (
+    )
+      or
+    (
+      /* We *do* want public_transport=stop_position for other modes of transport, like tram and rail */
       $not($exists($v.tags.bus)) or
       $v.tags.bus = "no"
     )
   )
+    and
+  (
+    $not($exists($v.tags.operator)) or
+    $contains($v.tags.operator, "Grand River Transit") or
+    $contains($v.tags.network, "Grand River Transit") or
+    $contains($v.tags.network, "GRT")
+  )
+
+disusedStopFilter: |
+  $contains($v.tags.operator, "Grand River Transit") or
+  $contains($v.tags.network, "Grand River Transit") or
+  $contains($v.tags.network, "GRT")
 
 stopTags:
   operator: "Grand River Transit"
   operator:short: "GRT"
   operator:wikidata: "Q3459117"
   operator:wikipedia: "en:Grand River Transit"
-  gtfs:stop_id:CA-ON-GRT: "{{ stop_id }}"
-  gtfs:stop_code:CA-ON-GRT: "{{ stop_code }}"
-  gtfs:stop_name:CA-ON-GRT: "{{ stop_name }}"
-  gtfs:location_type:CA-ON-GRT: "{{ location_type }}"
-  ref: "{{ stop_code }}"
-  name: "{{ stop_name }}"
